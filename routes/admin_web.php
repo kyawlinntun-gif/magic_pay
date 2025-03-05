@@ -13,5 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::prefix('admin')->namespace('backend')->middleware('auth:admin_user')->group(function() {
-    Route::get('/', 'PageController@home');
+    Route::get('/', 'PageController@home')->name('admin');
+
+    Route::resource('admin-user', 'AdminUserController');
 });
