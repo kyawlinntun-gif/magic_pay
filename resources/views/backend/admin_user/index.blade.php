@@ -13,26 +13,47 @@
         </div>
     </div>
 </div>
-<div class="content">
+<a href="{{ route('admin-user.create') }}" class="btn btn-primary mt-3"><i class="fas fa-plus-circle mr-2"></i>Create New User</a>
+<div class="content mt-3">
     <div class="card">
         <div class="card-body">
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="datatable">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $user)
-                    <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                    </tr>
-                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "/admin/admin-user/datatables/ssd",
+            columns: [
+                {
+                    data: "name",
+                    name: "name"
+                },
+                {
+                    data: "email",
+                    name: "email"
+                },
+                {
+                    data: "phone",
+                    name: "phone"
+                }
+            ]
+        });
+    });
+</script>
 @endsection
